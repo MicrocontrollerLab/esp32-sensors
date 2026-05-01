@@ -1,18 +1,17 @@
 #include <Arduino.h>
-
-// put function declarations here:
-int myFunction(int, int);
+#include "display/oled_display.h"
 
 void setup() {
   // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+  // baudrate = how fast does esp send data
+  Serial.begin(115200);
+  Serial.println("OK");
+  init();
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-}
-
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+  delay(1000);
+  Serial.println("tick");
+  draw();
 }
