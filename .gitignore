@@ -84,3 +84,7 @@ Testing/
 # OS-specific Files
 .DS_Store
 Thumbs.db
+
+# config files
+.prettierrc
+.editorconfig
