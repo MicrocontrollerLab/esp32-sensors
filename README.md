@@ -2,9 +2,11 @@
 
 ## ⚙️ Setup V1 (Base System)
 
-🔗 Pinout Reference
+🔗 References
 
--> [esp32 OLED Pinout: https://www.espboards.dev/esp32/esp32-wroom-32d-oled/](Link for ESP32 pinout)
+-> [https://www.espboards.dev/esp32/esp32-wroom-32d-oled/](esp32 OLED Pinout)
+
+-> [https://www.fisicalive.altervista.org/Coding/37%20SENSOR%20KIT%20TUTORIAL%20FOR%20UNO%20AND%20MEGA%20v2.0.0.19.08.7.pdf](ELEGOO 37 Sensor Kit V2)
 
 ### 🧩 Components
 
