@@ -30,7 +30,7 @@ void loop() {
     counter++;
 
     // func call to generate text
-    build_text(final_text, sizeof(final_text), sensor_data.temperature, sensor_data.humidity, counter);
+    build_text(final_text, sizeof(final_text), sensor_data, counter);
     // show the entire text on the display
     display_print_text(final_text);
     display_update();

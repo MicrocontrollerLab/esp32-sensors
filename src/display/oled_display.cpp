@@ -45,16 +45,16 @@ void display_print_text(const char* text) {
     display.print(text);
 }
 
-void build_text(char* buffer, size_t buffer_size, 
-    float value_1, float value_2, float value_3) {
+void build_text(char* buffer, size_t buffer_size, SensorData sensor_data, float value) {
     // save text in static buffer, without exceeding its size
     snprintf(buffer, buffer_size,
-        "e.g. Sens1: %.2f C\n"
-        "e.g. Sens2: %.2f %%\n"
-        "e.g. Sens3: %.0f .\n"
+        "ESP32 - Sensor Data\n"
         ".\n"
-        ".\n"
-        ".\n"
-        ".\n"
-        ".", value_1, value_2, value_3);
+        "Temp : %.2f C\n"
+        "Hum : %.2f %%\n"
+        "LDR : %.0f \n"
+        "LDR: %.2f %%\n"
+        "counter: %.0f\n"
+        ".\n", sensor_data.temperature, sensor_data.humidity, 
+        sensor_data.light, (sensor_data.light / 4095.0) * 100.0, value);
 }
