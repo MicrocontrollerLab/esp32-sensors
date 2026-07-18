@@ -2,8 +2,9 @@
 #include "display/oled_display.h"
 #include <sensor/sensor.h>
 
-// test
-int counter = 0;
+void test() {
+
+}
 
 void setup() {
     // put your setup code here, to run once:
@@ -20,18 +21,19 @@ void loop() {
     // put your main code here, to run repeatedly:
     display_clear();
 
+    //test();
+
     // size of display text
     char final_text[192]; 
 
     // all sensor data
     SensorData sensor_data = get_sensor_data();
 
-    // small test with counter
-    counter++;
 
     // func call to generate text
-    build_text(final_text, sizeof(final_text), sensor_data, counter);
+    build_text(final_text, sizeof(final_text), sensor_data);
     // show the entire text on the display
     display_print_text(final_text);
     display_update();
 }
+
