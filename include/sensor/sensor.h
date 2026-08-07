@@ -1,10 +1,17 @@
 #pragma once
 
 struct SensorData {
-    float ds18b20_temperature1;
-    float ds18b20_temperature2;
-    float dht_temperature;
-    float humidity;
+
+    float ds18b20_temperature;
+
+    float dht11_temperature;
+    float dht11_humidity;
+
+    float dht20_temperature;
+    float dht20_humidity;
+
+    float gas_raw;
+
     float light;
 };
 

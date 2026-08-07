@@ -17,7 +17,7 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 
 void display_init() {
     Serial.begin(115200);
-
+    Wire.begin(21,22);
     /**
     * Initialize the OLED display at I2C address 0x3C
     * SSD1306_SWITCHCAPVCC enables internal charge pump
@@ -50,15 +50,17 @@ void build_text(char* buffer, size_t buffer_size, SensorData sensor_data) {
     snprintf(buffer, buffer_size,
         "ESP32 - Sensor Data\n"
         ".\n"
-        "Temp : %.2f C\n"
-        "Hum : %.2f %%\n"
-        "LDR (num) %.0f \n" "LDR: %.2f %%\n"
-        "ds18b20_1: %.0f\n"
-        "ds18b20_2: %.0f\n", 
-        sensor_data.dht_temperature, 
-        sensor_data.humidity, 
-        sensor_data.light, 
-        (sensor_data.light / 4095.0) * 100.0, 
-        sensor_data.ds18b20_temperature1, 
-        sensor_data.ds18b20_temperature2);
+        "DHT11 Temp : %.2f C\n"
+        "DHT11 Hum : %.2f %%\n"
+        "DHT20 Temp: %.2f C\n"
+        "DHT20 Hum: %.2f %%\n"
+        "ds18b20 Temp: %.2f C\n"
+        "Gas Raw: %.2f\n",
+        sensor_data.dht11_temperature, 
+        sensor_data.dht11_humidity, 
+        sensor_data.dht20_temperature, 
+        sensor_data.dht20_humidity, 
+        sensor_data.ds18b20_temperature, 
+        sensor_data.gas_raw
+        );
 }

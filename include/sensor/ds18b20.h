@@ -7,7 +7,6 @@
 
 void ds18b20_init();
 
-float ds18b20_get_temperature1();
-float ds18b20_get_temperature2();
+float ds18b20_get_temperature();
 
 #endif

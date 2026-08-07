@@ -75,10 +75,8 @@ Used for:
 
 ## 🚧 Limitations (V1)
 
-- no real sensors connected yet
 
 ---
 
 ## 🚀 Next Steps
 
-- integrate real sensors
