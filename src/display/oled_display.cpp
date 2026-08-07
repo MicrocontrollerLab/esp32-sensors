@@ -50,17 +50,18 @@ void build_text(char* buffer, size_t buffer_size, SensorData sensor_data) {
     snprintf(buffer, buffer_size,
         "ESP32 - Sensor Data\n"
         ".\n"
-        "DHT11 Temp : %.2f C\n"
-        "DHT11 Hum : %.2f %%\n"
-        "DHT20 Temp: %.2f C\n"
-        "DHT20 Hum: %.2f %%\n"
-        "ds18b20 Temp: %.2f C\n"
-        "Gas Raw: %.2f\n",
+        "DHT11 Temp : %.1f C\n"
+        "DHT11 Hum : %.1f %%\n"
+        "DHT20 Temp: %.1f C\n"
+        "DHT20 Hum: %.1f %%\n"
+        "Gas Raw: %.0f\n"
+        "LDR: %.0f; (%.1f %%)\n",
         sensor_data.dht11_temperature, 
         sensor_data.dht11_humidity, 
         sensor_data.dht20_temperature, 
-        sensor_data.dht20_humidity, 
-        sensor_data.ds18b20_temperature, 
-        sensor_data.gas_raw
+        sensor_data.dht20_humidity * 100, // scale to percentage
+        sensor_data.gas_raw,
+        sensor_data.light,
+        (sensor_data.light / 4095.0) * 100.0
         );
 }

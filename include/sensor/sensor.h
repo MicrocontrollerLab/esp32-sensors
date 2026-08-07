@@ -2,8 +2,6 @@
 
 struct SensorData {
 
-    float ds18b20_temperature;
-
     float dht11_temperature;
     float dht11_humidity;
 

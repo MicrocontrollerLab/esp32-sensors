@@ -4,20 +4,20 @@
 #include <Wire.h>
 
 void test() {
+    // scan for i2c devices
     Serial.begin(115200);
-
     Wire.begin(21,22);
 
-    Serial.println("Scan");
+    Serial.println("Scan...");
 
-    for (byte i = 1; i < 127; i++)
+    for (byte addr=1; addr<127; addr++)
     {
-        Wire.beginTransmission(i);
+        Wire.beginTransmission(addr);
 
-        if (Wire.endTransmission() == 0)
+        if (Wire.endTransmission()==0)
         {
             Serial.print("Found: 0x");
-            Serial.println(i, HEX);
+            Serial.println(addr,HEX);
         }
     }
 }
@@ -29,9 +29,9 @@ void setup() {
     Serial.println("OK");
 
     // initialize everything
-    all_sensors_init();
     display_init();
-    test(); // for debugging 
+    all_sensors_init();
+    test();
 }
 
 void loop() {
@@ -39,10 +39,10 @@ void loop() {
     display_clear();
 
     //testing for debugging purposes
-    test();
+    //test();
 
     // size of display text
-    char final_text[192]; 
+    char final_text[192] = "wow"; 
 
     // all sensor data
     SensorData sensor_data = get_sensor_data();
@@ -50,6 +50,7 @@ void loop() {
 
     // func call to generate text
     build_text(final_text, sizeof(final_text), sensor_data);
+    
     // show the entire text on the display
     display_print_text(final_text);
     display_update();

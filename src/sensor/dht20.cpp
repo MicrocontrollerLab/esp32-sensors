@@ -7,8 +7,10 @@ DFRobot_DHT20 dht20;
 
 void dht20_init()
 {
-    Wire.begin(16,17);  // SDA = GPIO16, SCL = GPIO17
+    //I²C initialization, default pins are SDA = 21, SCL = 22
+    Wire.begin(21, 22);
     dht20.begin();
+    delay(50);
 }
 
 float dht20_get_temperature()
