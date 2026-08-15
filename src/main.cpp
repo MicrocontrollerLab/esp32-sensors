@@ -4,6 +4,9 @@
 #include <Wire.h>
 #include "mqtt/mqtt.h"
 
+short iteration_cycles = 0;
+short mqtt_publish_cycles = 25;
+
 void test() {
     // scan for i2c devices
     Serial.begin(115200);
@@ -35,8 +38,6 @@ void setup() {
     display_init();
     all_sensors_init();
     mqtt_init();
-
-    // test();
 }
 
 void loop() {
@@ -61,10 +62,15 @@ void loop() {
     display_update();
 
     // keep the mqtt connection alive
-    mqtt_publish_sensor_data(sensor_data);
     mqtt_loop();
 
-    // wait for 1 second before the next loop iteration
-    delay(3000); 
+    // publish sensor data to mqtt every ... cycles
+    if (iteration_cycles == mqtt_publish_cycles)
+    {
+        mqtt_publish_sensor_data(sensor_data);
+        iteration_cycles = 0;
+    }
+
+    iteration_cycles++;
 }
 
