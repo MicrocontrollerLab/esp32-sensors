@@ -3,6 +3,7 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 #include "display/oled_display.h"
+#include <mqtt/mqtt.h>
 
 /* Display configuration */
 #define SCREEN_WIDTH 128 // pixels
@@ -48,14 +49,16 @@ void display_print_text(const char* text) {
 void build_text(char* buffer, size_t buffer_size, SensorData sensor_data) {
     // save text in static buffer, without exceeding its size
     snprintf(buffer, buffer_size,
-        "ESP32 - Sensor Data\n"
-        ".\n"
+        "IP: %s\n"
+        "MQTT connected: %s\n"
         "DHT11 Temp : %.1f C\n"
         "DHT11 Hum : %.1f %%\n"
         "DHT20 Temp: %.1f C\n"
         "DHT20 Hum: %.1f %%\n"
         "Gas Raw: %.0f\n"
         "LDR: %.0f; (%.1f %%)\n",
+        wifi_get_ip().toString().c_str(),
+        mqtt_is_connected() ? "Yes" : "No",
         sensor_data.dht11_temperature, 
         sensor_data.dht11_humidity, 
         sensor_data.dht20_temperature, 

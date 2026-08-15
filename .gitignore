@@ -89,3 +89,6 @@ Thumbs.db
 # config files
 .prettierrc
 .editorconfig
+
+#secrets
+include/secrets.h

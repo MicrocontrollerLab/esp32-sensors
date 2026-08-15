@@ -2,6 +2,7 @@
 #include "display/oled_display.h"
 #include <sensor/sensor.h>
 #include <Wire.h>
+#include "mqtt/mqtt.h"
 
 void test() {
     // scan for i2c devices
@@ -10,10 +11,12 @@ void test() {
 
     Serial.println("Scan...");
 
+    // trying all possible i2c addresses (1-127)
     for (byte addr=1; addr<127; addr++)
     {
         Wire.beginTransmission(addr);
 
+        // if endTransmission returns 0, it means a device is present at that address
         if (Wire.endTransmission()==0)
         {
             Serial.print("Found: 0x");
@@ -31,7 +34,9 @@ void setup() {
     // initialize everything
     display_init();
     all_sensors_init();
-    test();
+    mqtt_init();
+
+    // test();
 }
 
 void loop() {
@@ -42,7 +47,7 @@ void loop() {
     //test();
 
     // size of display text
-    char final_text[192] = "wow"; 
+    char final_text[192] = ""; 
 
     // all sensor data
     SensorData sensor_data = get_sensor_data();
@@ -54,5 +59,12 @@ void loop() {
     // show the entire text on the display
     display_print_text(final_text);
     display_update();
+
+    // keep the mqtt connection alive
+    mqtt_publish_sensor_data(sensor_data);
+    mqtt_loop();
+
+    // wait for 1 second before the next loop iteration
+    delay(3000); 
 }
 
