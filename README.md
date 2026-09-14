@@ -2,18 +2,41 @@
 
 Used for IoT data pipeline:
 
-```text
-🌡️ Sensors
-    ↓
-🔲 ESP32
-    ↓ Wi-Fi (Publish)
-📡 MQTT Broker
-    ↓ (Subscribe)
-🔴 Node-RED
-    ↓
-🗄️ PostgreSQL
-    ↓
-📊 Grafana
+## 🔗 Complete IoT Pipeline
+
+```mermaid
+flowchart LR
+    SENSORS["🧪 Sensors<br/>DHT11 • DHT20<br/>Gas • Light"]
+    
+    ESP["🔧 ESP32<br/>Measures every 5s"]
+    
+    MQTT["📡 MQTT Broker<br/>Port 1883<br/>iot/test/sensors"]
+    
+    NR["🔄 Node-RED<br/>Process & Rate Limit"]
+    
+    DB[("🗄️ PostgreSQL<br/>Persistent Storage")]
+    
+    GRAF["📊 Grafana<br/>Visualization"]
+
+    SENSORS -->|Sensor readings| ESP
+    ESP -->|JSON / MQTT Publish| MQTT
+    MQTT -->|Subscribe| NR
+    NR -->|Store e.g. every 30s| DB
+    DB -->|SQL Query| GRAF
+
+    classDef sensors fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#111827
+    classDef esp fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#111827
+    classDef mqtt fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827
+    classDef nodered fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#111827
+    classDef database fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#111827
+    classDef grafana fill:#ffedd5,stroke:#ea580c,stroke-width:2px,color:#111827
+
+    class SENSORS sensors
+    class ESP esp
+    class MQTT mqtt
+    class NR nodered
+    class DB database
+    class GRAF grafana
 ```
 
 ## ⚙️ Setup
